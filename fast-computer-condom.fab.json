@@ -1,0 +1,23 @@
+{
+  "kind": "pcb",
+  "name": "Fast Computer Condom (isolated USB hub)",
+  "source": "fast-computer-condom.kicad_pcb",
+  "qty": 20,
+  "options": {
+    "layers": 6,
+    "thickness_mm": 1.6,
+    "color": "purple",
+    "finish": "enig",
+    "copper_oz": 1
+  },
+  "features": {
+    "width_mm": 65.25,
+    "height_mm": 65.0,
+    "min_drill_mm": 0.2
+  },
+  "outputs": {
+    "gerbers": "mfg/main/gerbers.zip",
+    "bom": "mfg/main/bom.csv",
+    "positions": "mfg/main/positions.csv"
+  }
+}
