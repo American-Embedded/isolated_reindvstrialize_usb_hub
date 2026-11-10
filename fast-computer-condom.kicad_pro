@@ -2,6 +2,91 @@
   "board": {
     "3dviewports": [],
     "design_settings": {
+      "bom_export_filename": "${PROJECTNAME}.csv",
+      "bom_fmt_presets": [],
+      "bom_fmt_settings": {
+        "field_delimiter": ",",
+        "include_byte_order_mark": false,
+        "keep_line_breaks": false,
+        "keep_tabs": false,
+        "name": "CSV",
+        "ref_delimiter": ",",
+        "ref_range_delimiter": "",
+        "string_delimiter": "\""
+      },
+      "bom_presets": [],
+      "bom_settings": {
+        "exclude_dnp": false,
+        "fields_ordered": [
+          {
+            "group_by": false,
+            "label": "Reference",
+            "name": "Reference",
+            "show": true
+          },
+          {
+            "group_by": false,
+            "label": "Qty",
+            "name": "${QUANTITY}",
+            "show": true
+          },
+          {
+            "group_by": true,
+            "label": "Value",
+            "name": "Value",
+            "show": true
+          },
+          {
+            "group_by": true,
+            "label": "DNP",
+            "name": "${DNP}",
+            "show": true
+          },
+          {
+            "group_by": true,
+            "label": "Exclude from BOM",
+            "name": "${EXCLUDE_FROM_BOM}",
+            "show": true
+          },
+          {
+            "group_by": true,
+            "label": "Exclude from Board",
+            "name": "${EXCLUDE_FROM_BOARD}",
+            "show": true
+          },
+          {
+            "group_by": true,
+            "label": "Exclude from Simulation",
+            "name": "${EXCLUDE_FROM_SIM}",
+            "show": true
+          },
+          {
+            "group_by": true,
+            "label": "Exclude from Position Files",
+            "name": "${EXCLUDE_FROM_POS_FILES}",
+            "show": true
+          },
+          {
+            "group_by": true,
+            "label": "Footprint",
+            "name": "Footprint",
+            "show": true
+          },
+          {
+            "group_by": false,
+            "label": "Datasheet",
+            "name": "Datasheet",
+            "show": true
+          }
+        ],
+        "filter_scope": "reference",
+        "filter_string": "",
+        "group_symbols": true,
+        "include_excluded_from_bom": true,
+        "name": "Default Editing",
+        "sort_asc": true,
+        "sort_field": "Reference"
+      },
       "defaults": {
         "apply_defaults_to_fp_barcodes": false,
         "apply_defaults_to_fp_dimensions": false,
@@ -82,68 +167,227 @@
         }
       ],
       "drc_exclusions": [
-        [
-          "lib_footprint_mismatch|132260000|78500000|14fbe2a0-e5b3-4b33-b942-f68e048c9c33|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
-          "lib_footprint_mismatch|148550000|103500000|0e8ff530-023a-482b-b5f7-3c8128090f6e|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
-          "lib_footprint_mismatch|159262500|89350000|ea019304-dc61-4bce-b475-6a4f89011101|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
-          "lib_footprint_mismatch|174792500|84600000|b2fd85cc-6cd3-4d93-a3ff-e4cf80397d5a|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
-          "lib_footprint_mismatch|185840000|109000000|c61941ad-d2fb-465a-b557-9e223eb7048f|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
-          "lib_footprint_mismatch|185840000|73000000|d2cb148f-7ee6-46ad-b2c7-a868f6c673a6|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
-          "lib_footprint_mismatch|185840000|97000000|879f26ae-2f72-4dae-b529-36ce56a5735e|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
-          "silk_over_copper|186500000|101700000|9dd825e0-6823-4d9a-814d-324f4bf1b291|96adc3ed-e86c-4b74-808c-e0dbb84349a7",
-          ""
-        ],
-        [
-          "silk_over_copper|186500000|104300000|a82bf3b8-25c6-443d-b23e-5796d4320eb4|d9ea3fad-3fa7-47eb-98e6-f45060ac4a78",
-          ""
-        ],
-        [
-          "silk_over_copper|186500000|113700000|4b105e1c-16d5-41c3-9c82-d9b162c32047|60510c01-6daf-4591-839c-5214c2acf111",
-          ""
-        ],
-        [
-          "silk_over_copper|186500000|68300000|ae869bea-7d63-4d67-b8d0-060990b65384|9ab17403-e400-4a76-825a-fb92e51ffa74",
-          ""
-        ],
-        [
-          "silk_over_copper|186500000|77700000|46c0d6af-7826-4472-a790-7b089c7906e1|6f1112e8-8b7f-46e3-a889-0f0ae8ea32c5",
-          ""
-        ],
-        [
-          "silk_over_copper|186500000|92300000|b0deb7a7-086e-46c9-bd05-ecb8bd584891|e8ad639a-3fe9-4a22-9353-243e697c1286",
-          ""
-        ],
-        [
-          "text_thickness|154500000|69270000|c472a7cf-b965-4a6a-b3b1-4fbe3b21f85e|00000000-0000-0000-0000-000000000000",
-          ""
-        ]
+        {
+          "marker": {
+            "error_type": "DRCET_LIB_FOOTPRINT_MISMATCH",
+            "items": [
+              {
+                "value": "879f26ae-2f72-4dae-b529-36ce56a5735e"
+              }
+            ],
+            "position": {
+              "x_nm": "185840000",
+              "y_nm": "97000000"
+            }
+          }
+        },
+        {
+          "marker": {
+            "error_type": "DRCET_LIB_FOOTPRINT_MISMATCH",
+            "items": [
+              {
+                "value": "d2cb148f-7ee6-46ad-b2c7-a868f6c673a6"
+              }
+            ],
+            "position": {
+              "x_nm": "185840000",
+              "y_nm": "73000000"
+            }
+          }
+        },
+        {
+          "marker": {
+            "error_type": "DRCET_LIB_FOOTPRINT_MISMATCH",
+            "items": [
+              {
+                "value": "c61941ad-d2fb-465a-b557-9e223eb7048f"
+              }
+            ],
+            "position": {
+              "x_nm": "185840000",
+              "y_nm": "109000000"
+            }
+          }
+        },
+        {
+          "marker": {
+            "error_type": "DRCET_LIB_FOOTPRINT_MISMATCH",
+            "items": [
+              {
+                "value": "14fbe2a0-e5b3-4b33-b942-f68e048c9c33"
+              }
+            ],
+            "position": {
+              "x_nm": "132260000",
+              "y_nm": "78500000"
+            }
+          }
+        },
+        {
+          "marker": {
+            "error_type": "DRCET_LIB_FOOTPRINT_MISMATCH",
+            "items": [
+              {
+                "value": "ea019304-dc61-4bce-b475-6a4f89011101"
+              }
+            ],
+            "position": {
+              "x_nm": "159262500",
+              "y_nm": "89350000"
+            }
+          }
+        },
+        {
+          "marker": {
+            "error_type": "DRCET_LIB_FOOTPRINT_MISMATCH",
+            "items": [
+              {
+                "value": "b2fd85cc-6cd3-4d93-a3ff-e4cf80397d5a"
+              }
+            ],
+            "position": {
+              "x_nm": "174792500",
+              "y_nm": "84600000"
+            }
+          }
+        },
+        {
+          "marker": {
+            "error_type": "DRCET_LIB_FOOTPRINT_MISMATCH",
+            "items": [
+              {
+                "value": "0e8ff530-023a-482b-b5f7-3c8128090f6e"
+              }
+            ],
+            "position": {
+              "x_nm": "148550000",
+              "y_nm": "103500000"
+            }
+          }
+        },
+        {
+          "marker": {
+            "error_type": "DRCET_SILK_MASK_CLEARANCE",
+            "items": [
+              {
+                "value": "9dd825e0-6823-4d9a-814d-324f4bf1b291"
+              },
+              {
+                "value": "96adc3ed-e86c-4b74-808c-e0dbb84349a7"
+              }
+            ],
+            "position": {
+              "x_nm": "186500000",
+              "y_nm": "101700000"
+            }
+          }
+        },
+        {
+          "marker": {
+            "error_type": "DRCET_SILK_MASK_CLEARANCE",
+            "items": [
+              {
+                "value": "46c0d6af-7826-4472-a790-7b089c7906e1"
+              },
+              {
+                "value": "6f1112e8-8b7f-46e3-a889-0f0ae8ea32c5"
+              }
+            ],
+            "position": {
+              "x_nm": "186500000",
+              "y_nm": "77700000"
+            }
+          }
+        },
+        {
+          "marker": {
+            "error_type": "DRCET_SILK_MASK_CLEARANCE",
+            "items": [
+              {
+                "value": "4b105e1c-16d5-41c3-9c82-d9b162c32047"
+              },
+              {
+                "value": "60510c01-6daf-4591-839c-5214c2acf111"
+              }
+            ],
+            "position": {
+              "x_nm": "186500000",
+              "y_nm": "113700000"
+            }
+          }
+        },
+        {
+          "marker": {
+            "error_type": "DRCET_SILK_MASK_CLEARANCE",
+            "items": [
+              {
+                "value": "b0deb7a7-086e-46c9-bd05-ecb8bd584891"
+              },
+              {
+                "value": "e8ad639a-3fe9-4a22-9353-243e697c1286"
+              }
+            ],
+            "position": {
+              "x_nm": "186500000",
+              "y_nm": "92300000"
+            }
+          }
+        },
+        {
+          "marker": {
+            "error_type": "DRCET_SILK_MASK_CLEARANCE",
+            "items": [
+              {
+                "value": "ae869bea-7d63-4d67-b8d0-060990b65384"
+              },
+              {
+                "value": "9ab17403-e400-4a76-825a-fb92e51ffa74"
+              }
+            ],
+            "position": {
+              "x_nm": "186500000",
+              "y_nm": "68300000"
+            }
+          }
+        },
+        {
+          "marker": {
+            "error_type": "DRCET_SILK_MASK_CLEARANCE",
+            "items": [
+              {
+                "value": "a82bf3b8-25c6-443d-b23e-5796d4320eb4"
+              },
+              {
+                "value": "d9ea3fad-3fa7-47eb-98e6-f45060ac4a78"
+              }
+            ],
+            "position": {
+              "x_nm": "186500000",
+              "y_nm": "104300000"
+            }
+          }
+        },
+        {
+          "marker": {
+            "error_type": "DRCET_TEXT_THICKNESS",
+            "items": [
+              {
+                "value": "c472a7cf-b965-4a6a-b3b1-4fbe3b21f85e"
+              }
+            ],
+            "position": {
+              "x_nm": "154500000",
+              "y_nm": "69270000"
+            }
+          }
+        }
       ],
       "meta": {
-        "version": 2
+        "version": 3
       },
       "rule_severities": {
         "annular_width": "error",
+        "assertion_failure": "error",
         "clearance": "error",
         "connection_width": "warning",
         "copper_edge_clearance": "error",
@@ -157,9 +401,11 @@
         "extra_footprint": "warning",
         "footprint": "error",
         "footprint_filters_mismatch": "ignore",
+        "footprint_scaled_with_pads": "warning",
         "footprint_symbol_field_mismatch": "warning",
         "footprint_symbol_mismatch": "warning",
         "footprint_type_mismatch": "ignore",
+        "hole_aspect_ratio": "error",
         "hole_clearance": "error",
         "hole_to_hole": "warning",
         "holes_co_located": "warning",
@@ -171,11 +417,18 @@
         "lib_footprint_issues": "warning",
         "lib_footprint_mismatch": "warning",
         "malformed_courtyard": "error",
+        "malformed_microvia_stack_span": "error",
+        "microvia_crosses_core": "warning",
         "microvia_drill_out_of_range": "error",
+        "microvia_stack_depth": "error",
+        "microvia_stack_not_filled": "warning",
         "mirrored_text_on_front_layer": "warning",
         "missing_courtyard": "ignore",
         "missing_footprint": "warning",
         "missing_tuning_profile": "warning",
+        "net_chain_return_path": "error",
+        "net_chain_stub_length": "error",
+        "net_chain_tuning_profiles": "error",
         "net_conflict": "warning",
         "nonmirrored_text_on_back_layer": "warning",
         "npth_inside_courtyard": "ignore",
@@ -204,6 +457,8 @@
         "unconnected_items": "error",
         "unresolved_variable": "error",
         "via_dangling": "warning",
+        "via_diameter": "error",
+        "via_stitch_overlap": "error",
         "zones_intersect": "error"
       },
       "rules": {
@@ -323,16 +578,32 @@
           "drill": 0.3
         }
       ],
+      "via_stack_presets": [],
       "zones_allow_external_fillets": false
+    },
+    "idf_export": {
+      "calculate_height_from_models": true,
+      "include_dnp": true,
+      "include_unspecified": true,
+      "origin_mode": 2,
+      "part_number_field": "Value",
+      "units": 0,
+      "user_origin_x": 0.0,
+      "user_origin_y": 0.0
     },
     "ipc2581": {
       "bom_rev": "",
+      "custom_sections": false,
       "dist": "",
       "distpn": "",
       "internal_id": "",
       "mfg": "",
+      "mode": "",
       "mpn": "",
-      "sch_revision": "B-sch"
+      "net_names": "",
+      "ref_des": "",
+      "sch_revision": "B-sch",
+      "sections": ""
     },
     "layer_pairs": [],
     "layer_presets": [],
@@ -578,12 +849,13 @@
     }
   },
   "libraries": {
+    "pinned_design_block_libs": [],
     "pinned_footprint_libs": [],
     "pinned_symbol_libs": []
   },
   "meta": {
     "filename": "fast-computer-condom.kicad_pro",
-    "version": 3
+    "version": 4
   },
   "net_settings": {
     "classes": [
@@ -654,6 +926,8 @@
     "meta": {
       "version": 5
     },
+    "net_chain_classes": {},
+    "net_chain_netclasses": {},
     "net_colors": {},
     "netclass_assignments": {},
     "netclass_patterns": [
@@ -692,6 +966,9 @@
     ]
   },
   "pcbnew": {
+    "find_by_properties": {
+      "recent_queries": []
+    },
     "last_paths": {
       "gencad": "",
       "idf": "",
@@ -1143,11 +1420,12 @@
   "text_variables": {},
   "tuning_profiles": {
     "meta": {
-      "version": 0
+      "version": 2
     },
     "tuning_profiles_impedance_geometric": [
       {
         "enable_time_domain_tuning": true,
+        "frequency": 1000000000.0,
         "layer_entries": [
           {
             "bottom_reference_layer": "In1.Cu",
@@ -1158,6 +1436,8 @@
             "width": 193808
           }
         ],
+        "model_solder_mask": false,
+        "net_chain_bridge_prop_delay": 0,
         "profile_name": "USB",
         "target_impedance": 90.0,
         "type": 1,

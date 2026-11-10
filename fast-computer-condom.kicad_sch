@@ -14712,7 +14712,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "TPS22975DSGR"
+		(property "Value" "TPS22975NDSGR"
 			(at 223.52 105.41 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14759,7 +14759,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "TPS22975DSGR"
+		(property "MPN" "TPS22975NDSGR"
 			(at -114.3 -91.44 0)
 			(hide yes)
 			(show_name no)
@@ -14781,7 +14781,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C524777"
+		(property "LCSC" "C2149871"
 			(at -114.3 -91.44 0)
 			(hide yes)
 			(show_name no)
