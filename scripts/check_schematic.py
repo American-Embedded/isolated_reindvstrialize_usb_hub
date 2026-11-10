@@ -67,9 +67,11 @@ for i,(ch,j,mux,esd,fuse,cin,cout,command) in enumerate([
     same((cc,10),(cc,11),(gate,3),('U4',29))
     assert net(cc,5).startswith('unconnected-')
     same((ch,6),(cin,1),('U24',8),(f'R{53+i}',1))
-    same((ch,1),(fuse,2))
-    same((fuse,1),(j,'A4'),(cc,4),(cout,1),(esd,5))
-    different((ch,6),(ch,1),(fuse,1))
+    # PTC fuses are unpolarized; either pad may face the switch.
+    fin,fout = (2,1) if net(fuse,2) == net(ch,1) else (1,2)
+    same((ch,1),(fuse,fin))
+    same((fuse,fout),(j,'A4'),(cc,4),(cout,1),(esd,5))
+    different((ch,6),(ch,1),(fuse,fout))
     # Layout pin swap: the mux and ESD channels are used crossed (D+ on D-/D1- and I/O1)
     # so every hub pair reaches the connector without a polarity twist.
     same((j,'A6'),(j,'B6'),(mux,2),(esd,1),(esd,6))

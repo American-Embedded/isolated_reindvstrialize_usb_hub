@@ -240,6 +240,7 @@
         {
           "td_allow_use_two_tracks": true,
           "td_curve_segcount": 0,
+          "td_enabled": false,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -251,6 +252,7 @@
         {
           "td_allow_use_two_tracks": true,
           "td_curve_segcount": 0,
+          "td_enabled": false,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -262,6 +264,7 @@
         {
           "td_allow_use_two_tracks": true,
           "td_curve_segcount": 0,
+          "td_enabled": false,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -559,6 +562,7 @@
       "pin_to_pin": "error",
       "power_pin_not_driven": "error",
       "same_local_global_label": "warning",
+      "same_local_global_power": "warning",
       "similar_label_and_power": "warning",
       "similar_labels": "warning",
       "similar_power": "warning",
@@ -650,8 +654,8 @@
     "meta": {
       "version": 5
     },
-    "net_colors": null,
-    "netclass_assignments": null,
+    "net_colors": {},
+    "netclass_assignments": {},
     "netclass_patterns": [
       {
         "netclass": "USB",
@@ -1002,6 +1006,36 @@
           "label": "LCSC Part",
           "name": "LCSC Part",
           "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Dielectric",
+          "name": "Dielectric",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Tolerance",
+          "name": "Tolerance",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Minimum effective capacitance",
+          "name": "Minimum effective capacitance",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Pins",
+          "name": "Sim.Pins",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Voltage",
+          "name": "Voltage",
+          "show": false
         }
       ],
       "filter_string": "",
@@ -1081,7 +1115,7 @@
         "uuid": "46ec7b9e-7ce4-471b-b2a3-117ade628de1"
       }
     ],
-    "used_designators": "H1-6,D1-10,C1-43,JP1-4,TP1-24,R1-37,Q1-4,F1-6,U1-25,FB1-4,Y1-4,#PWR1-115,J1-11",
+    "used_designators": "#PWR1-115,C1-43,D1-10,F1-6,FB1-4,H1-6,J1-11,JP1-4,Q1-4,R1-37,TP1-24,U1-25,Y1-4",
     "variants": []
   },
   "sheets": [

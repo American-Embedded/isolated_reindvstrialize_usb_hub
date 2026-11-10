@@ -1,3 +1,31 @@
+BOM and fabrication review, revision B-pcb — 2026-09-25
+
+Every placed part now has an LCSC, MPN and Manufacturer field, checked against the JLCPCB catalogue on 2026-09-25. `scripts/apply_bom.py` writes them into the schematics. `scripts/sync_pcb_fields.py` copies them onto the footprints as text edits, because a pcbnew Python save drops the placement rule areas and a track segment. The netlist is unchanged apart from the F3–F6 values and the removal of H5. KiCad 10.0.6 results:
+- ERC: 0 violations.
+- DRC: 0 unconnected items and 0 parity issues. Two silk text warnings remain (below).
+- `scripts/check_schematic.py`: 92 checks pass.
+
+| Change | Detail |
+| --- | --- |
+| Wrong LCSC codes | C13585 (10uF/50V) was on the 22uF parts. C52923 (1uF) was on the 4.7uF and 30pF parts. C25905 (5.1kR) was on the 1kR parts. C22374900 (4A hold) was on the "500mA" fuses. All are replaced. |
+| Capacitors | 4.7uF: Murata GRM188Z71C475KE21D, 16V X7R (≥2uF at 1.8V). 22uF CH217 VIN: GRM31CZ71C226ME15L, 16V X7R (about 13uF at 5V). 47uF port bulk: GRM31CR61E476ME44L, 25V **X5R**; no 1206 47uF X7R exists. C52 CT: GRM1555C1H103JE01D C0G. The other 10nF parts are 50V X7R. The Voltage/Dielectric fields match the parts. |
+| F3–F6 | 500mA → **750mA** hold (Bourns MF-MSMF075/24-2, 1.5A trip, R1max 450mΩ). A 500mA-hold PTC under a 500mA port load runs at its hold limit and derates below it when warm. Its 1Ω R1max would also drop up to 0.5V of VBUS. The CH217 at about 600mA remains the primary limit. |
+| F1, F2 | F1: LUTE 0805L100/16AR, 1A hold. F2: LUTE 0805L300SL12ARGW, 3A hold, 12V. The previous F2 was a 2.6A part with 13 in stock. |
+| LEDs | XINGLIGHT XL-1608SYGC-06, 575nm, Vf 2.2V. An InGaN green at Vf ≈3V would barely light from 3.3V through 1kR. This part gives about 1mA. |
+| Crystal | YXC X322525MMB4SI, 25MHz, 10pF load, matching the symbol value. |
+| H5 | Removed. The reroute left it at (2.175, 2.175), about 125mm off the board, as a plated 2.2mm hole in the drill file and every copper layer. H1–H4 remain. |
+
+Stackup as routed: F, In1, In2 and B carry the host GND pours. GND2 is on all six layers, and a VBUS_ISO pour is on In2. There are no 3V3 planes. In3 and In4 are empty in the host region. Host-side B.Cu carries power only, and the host USB pair is on F.Cu over solid In1 GND. Outer pairs are 0.15/0.15mm over 0.1mm prepreg (Er 4.5): IPC-2141 gives about 89Ω differential, or about 86Ω with mask. Order a 6-layer stackup with about 0.1mm outer prepreg, or recheck the impedance against the fab's stackup.
+
+Before ordering
+- **U7 CH338F (C42387425) has 0 JLCPCB stock.** Consign it or pre-order it; everything else is stocked.
+- The JLCPCB BOM also lists JP1–4, TP10–16, H1–4 and J3 without LCSC codes (the preset includes excluded-from-BOM parts). Leave them unmatched.
+- `-> power input` and `<- to computer` use TrueType Berkeley Mono. Some glyph strokes fall below the 0.08mm silk minimum, so `kicad-build` still reports failure. Switch them to the KiCad font or enlarge them if crisp legends matter.
+- JP1–JP4 use the Bridged12 footprint (EQ strapped to ground by copper), but their value still reads `Jumper_3_Open`.
+- U25–U28 (WUSB3801) have no 3D model. The U24 model path points to a KiCad library model that is not installed here.
+- Mounting holes are floating plated rings. The copper gap is 1.8mm from H2 to host GND and 2.9mm from H1 to GND2. A metal chassis across H1–H4 therefore cuts the effective isolation creepage to about 4.7mm. Use insulating standoffs if the 6.25mm board spacing is the requirement.
+- Check the JLC placement preview for rotation offsets on the easyeda2kicad and fcc footprints (U16, U20–U28).
+
 PCB layout, revision B-pcb — 2026-09-23
 
 The PCB is synchronized with the schematic, fully placed and routed. KiCad 10.0.6 DRC with schematic parity: 0 errors, 0 unconnected items, 0 parity issues. Five warnings remain: library-footprint mismatches on U16/U20 (pre-existing) and U7/U8 (rotation rounding in graphics only), and the logo's TrueType stroke width.
@@ -6,7 +34,7 @@ The PCB is synchronized with the schematic, fully placed and routed. KiCad 10.0.
 | --- | --- |
 | Solder jumpers | JP1–JP4 (ISOUSB211 EQ straps) had no footprint. They now use `Jumper:SolderJumper-3_P1.3mm_Open_RoundedPad1.0x1.5mm`. |
 | USB channel swap | In `sch/USB_Output.kicad_sch`, hub D+ enters TS3USB221 pin 7 and leaves on pin 2, then uses USBLC6 I/O1. D- uses pin 8, pin 1 and I/O2. The switch and ESD channels are identical, so the signal path is unchanged. Every hub pair then reaches its connector without a polarity twist. `scripts/check_schematic.py` asserts the new mapping. |
-| Stackup | F: signals and GND pour. In1/In4: solid GND (host) and GND2 (isolated) planes. In2: inner signals and GND2 fill. In3: +3V3_ISO/+3V3 planes plus a VBUS_ISO pour from the TPS22975 output down the CH217 input column. B: USB pairs and GND pour. |
+| Stackup | *Superseded by the reroute, see the 2026-09-25 entry.* F: signals and GND pour. In1/In4: solid GND (host) and GND2 (isolated) planes. In2: inner signals and GND2 fill. In3: +3V3_ISO/+3V3 planes plus a VBUS_ISO pour from the TPS22975 output down the CH217 input column. B: USB pairs and GND pour. |
 | USB routing | 90 ohm pairs (0.15/0.15 mm) on outer layers over solid ground, with paired via transitions. USB-C D+/D- orientation links sit behind the pad row. USBLC6 devices are routed flow-through. The CH32X035 full-speed pair is routed as two single-ended traces. |
 | Isolation | At least 6.25 mm copper-to-copper between the host and isolated domains on every layer. No copper crosses the slot or the bridges. |
 | Placement | J5/J9 port groups swapped physical slots so the hub's port pairs don't cross; connector-to-sheet mapping is unchanged. The H5 exposed-mask ring shrank from r3.5 to r3.0 mm. The logo text moved to the back silkscreen, clear of the J3 Tag-Connect holes. Reference designators that can't fit legibly are on the Fab layers. |
